@@ -15,31 +15,58 @@ document.getElementById('coordinates-form').addEventListener('submit', function(
         return;
     }
 
-    // Use the Sunrise-Sunset API
-    const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${date}&formatted=0`;
-    
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log("API Response:", data);
-            
-            if (data.status === 'OK') {
-                const sunsetDate = new Date(data.results.sunset);
-                document.getElementById('sunset').innerText = 'Sunset: ' + sunsetDate.toLocaleTimeString();
+    const baseDate = new Date(date);
+    const resultsBody = document.getElementById('results-body');
+    resultsBody.innerHTML = ''; // Clear previous results
 
-                const endNtwDate = new Date(data.results.nautical_twilight_end);
-                document.getElementById('end_ntw').innerText = 'End of Nautical Twilight: ' + endNtwDate.toLocaleTimeString();
+    const fetchTimesForDate = (currentDate) => {
+        const dateStr = currentDate.toISOString().split('T')[0];
+        const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${dateStr}&formatted=0`;
 
-                // Calculate the nearest 15-min increment before the end of nautical twilight
-                const roundedEndNtw = new Date(endNtwDate);
-                roundedEndNtw.setMinutes(Math.floor(endNtwDate.getMinutes() / 15) * 15);
-                roundedEndNtw.setSeconds(0);
-                roundedEndNtw.setMilliseconds(0);
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'OK') {
+                    const sunsetDate = new Date(data.results.sunset);
+                    const endNtwDate = new Date(data.results.nautical_twilight_end);
 
-                document.getElementById('rounded_end_ntw').innerText = 'Nearest 15-min Increment Before End of Nautical Twilight: ' + roundedEndNtw.toLocaleTimeString();
-            } else {
-                alert("Error fetching data from API");
-            }
+                    // Calculate the nearest 15-min increment before the end of nautical twilight
+                    const roundedEndNtw = new Date(endNtwDate);
+                    roundedEndNtw.setMinutes(Math.floor(endNtwDate.getMinutes() / 15) * 15);
+                    roundedEndNtw.setSeconds(0);
+                    roundedEndNtw.setMilliseconds(0);
+
+                    return {
+                        date: dateStr,
+                        sunset: sunsetDate.toLocaleTimeString(),
+                        endNtw: endNtwDate.toLocaleTimeString(),
+                        roundedEndNtw: roundedEndNtw.toLocaleTimeString()
+                    };
+                } else {
+                    throw new Error("Error fetching data from API");
+                }
+            });
+    };
+
+    const datesToFetch = [];
+    for (let i = -3; i <= 3; i++) {
+        const currentDate = new Date(baseDate);
+        currentDate.setDate(baseDate.getDate() + i);
+        datesToFetch.push(currentDate);
+    }
+
+    Promise.all(datesToFetch.map(fetchTimesForDate))
+        .then(results => {
+            results.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.date}</td>
+                    <td>${result.sunset}</td>
+                    <td>${result.endNtw}</td>
+                    <td>${result.roundedEndNtw}</td>
+                `;
+                resultsBody.appendChild(row);
+            });
         })
         .catch(error => {
             console.error("Error:", error);
