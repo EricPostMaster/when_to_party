@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nautical Twilight Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Nautical Twilight Calculator</h1>
+    <form id="coordinates-form">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" value="37.0475">
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" value="-112.5263">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="">
+        <button type="submit">Calculate</button>
+    </form>
+    <div id="results">
+        <h2>Results:</h2>
+        <p id="sunset"></p>
+        <p id="end_ntw"></p>
+        <p id="rounded_end_ntw"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sunrise-sunset-js@1.1.1/lib/sunrise-sunset.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
