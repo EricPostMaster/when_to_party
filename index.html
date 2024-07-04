@@ -7,43 +7,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>When to Party?</h1>
-    <p>I volunteer with <a href="https://stellarvistaobservatory.org">Stellar Vista Observatory</a>, a nonprofit observatory based in Kanab, UT. We offer public and private night sky experiences throughout the year. One of the things I have found challenging is knowing when to start an event. If we start too early, the stars aren't out yet, and if we start too late, it can be hard to find each other in the dark, and we're all tired the next day!</p>
-
-    <p>This webpage is a simple solution: Just add your latitude and longitude and the date you want to have a star party, and this will tell you what time you should start your star party!</p>
-
-    <h2>How Does it Work?</h2>
-
-    <p>🕒 We start at the nearest 15-minute increment before the end of nautical twilight, which is just before astronomical twilight. That way, we can still find each other, but we don't have to stand around waiting for it to get dark.</p>
-
-    <p>🌐 The default latitude and longitude are for Kanab, but you can input your own.</p>
-
-    <p><strong>Note:</strong> The page displays the time in the time zone of your device.</p>
+    <div class="content">
+        <h1>When to Party?</h1>
+        <p>I volunteer with <a href="https://stellarvistaobservatory.org">Stellar Vista Observatory</a>, a nonprofit observatory based in Kanab, UT. We offer public and private night sky experiences throughout the year. One of the things I have found challenging is knowing when to start an event. If we start too early, the stars aren't out yet, and if we start too late, it can be hard to find each other in the dark, and we're all tired the next day!</p>
     
-    <form id="coordinates-form">
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" value="37.0475">
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" value="-112.5263">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date">
-        <button type="submit">Calculate</button>
-    </form>
-    <div id="results">
-        <h2>Results:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Sunset Time</th>
-                    <th>End of Nautical Twilight</th>
-                    <th>Recommended Start Time</th>
-                </tr>
-            </thead>
-            <tbody id="results-body">
-                <!-- Results will be appended here -->
-            </tbody>
-        </table>
+        <p>This webpage is a simple solution: Just add your latitude and longitude and the date you want to have a star party, and this will tell you what time you should start your star party!</p>
+    
+        <h2>How Does it Work?</h2>
+    
+        <p>🕒 We start at the nearest 15-minute increment before the end of nautical twilight, which is just before astronomical twilight. That way, we can still find each other, but we don't have to stand around waiting for it to get dark.</p>
+    
+        <p>🌐 The default latitude and longitude are for Kanab, but you can input your own.</p>
+    
+        <p><strong>Note:</strong> The page displays the time in the time zone of your device.</p>
+        
+        <form id="coordinates-form">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" name="latitude" value="37.0475">
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" name="longitude" value="-112.5263">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="results">
+            <h2>Results:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Sunset Time</th>
+                        <th>End of Nautical Twilight</th>
+                        <th>Recommended Start Time</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <!-- Results will be appended here -->
+                </tbody>
+            </table>
+        </div>
     </div>
     <footer>
         Created by EricPostMaster | <a href="https://github.com/EricPostMaster/when_to_party" target="_blank">View on GitHub</a>
