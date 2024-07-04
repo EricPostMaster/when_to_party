@@ -27,6 +27,27 @@ button {
     margin-top: 20px;
 }
 
-#results p {
-    margin: 5px 0;
+#results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#results th, #results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#results th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#results tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#results tr:hover {
+    background-color: #ddd;
 }
