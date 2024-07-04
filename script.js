@@ -26,7 +26,7 @@ document.getElementById('coordinates-form').addEventListener('submit', function(
         return fetch(url)
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'OK') {
+                if (data.status === 'OK' && data.results.sunset && data.results.nautical_twilight_end) {
                     const sunsetDate = new Date(data.results.sunset);
                     const endNtwDate = new Date(data.results.nautical_twilight_end);
 
@@ -43,7 +43,8 @@ document.getElementById('coordinates-form').addEventListener('submit', function(
                         roundedEndNtw: roundedEndNtw.toLocaleTimeString()
                     };
                 } else {
-                    throw new Error("Error fetching data from API");
+                    console.error("Missing expected data fields in API response for date:", dateStr);
+                    return null; // Return null if data is missing
                 }
             });
     };
@@ -58,14 +59,16 @@ document.getElementById('coordinates-form').addEventListener('submit', function(
     Promise.all(datesToFetch.map(fetchTimesForDate))
         .then(results => {
             results.forEach(result => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${result.date}</td>
-                    <td>${result.sunset}</td>
-                    <td>${result.endNtw}</td>
-                    <td>${result.roundedEndNtw}</td>
-                `;
-                resultsBody.appendChild(row);
+                if (result) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${result.date}</td>
+                        <td>${result.sunset}</td>
+                        <td>${result.endNtw}</td>
+                        <td>${result.roundedEndNtw}</td>
+                    `;
+                    resultsBody.appendChild(row);
+                }
             });
         })
         .catch(error => {
