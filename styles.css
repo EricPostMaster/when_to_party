@@ -5,7 +5,7 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+.content {
     max-width: 80%;
     margin: 0 auto;
 }
