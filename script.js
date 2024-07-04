@@ -50,7 +50,7 @@ document.getElementById('coordinates-form').addEventListener('submit', function(
     };
 
     const datesToFetch = [];
-    for (let i = -3; i <= 3; i++) {
+    for (let i = -3; i <= 14; i++) {
         const currentDate = new Date(baseDate);
         currentDate.setDate(baseDate.getDate() + i);
         datesToFetch.push(currentDate);
