@@ -4,7 +4,7 @@
 
 I volunteer with [Stellar Vista Observatory](https://stellarvistaobservatory.org), a nonprofit observatory based in Kanab, UT. We offer public and private night sky experiences throughout the year. One of the things I have found challenging is knowing when to start an event. If we start too early, the stars aren't out yet, and if we start too late, it can be hard to find each other in the dark, and we're all tired the next day!
 
-This webpage is a simple solution: Just add your latitude and longitude and the date you want to have a star party, and this will tell you what time you should start your star party!
+[This webpage](https://ericpostmaster.github.io/when_to_party/) is a simple solution: Just add your latitude and longitude and the date you want to have a star party, and this will tell you what time you should start your star party!
 
 ## How Does it Work?
 
